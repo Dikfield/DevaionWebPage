@@ -22,7 +22,9 @@ public class AccountController(DataContext context, ITokenService tokenService) 
         {
             UserName = registerDto.Username.ToLower(),
             PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-            PasswordSalt = hmac.Key
+            PasswordSalt = hmac.Key,
+            Email = "",
+            Country = ""
         };
 
         context.Users.Add(user);
