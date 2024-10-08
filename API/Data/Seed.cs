@@ -2,6 +2,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using API.Entities;
+using API.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data;
@@ -27,7 +28,9 @@ public class Seed
             user.UserName = user.UserName.ToLower();
             user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("1234"));
             user.PasswordSalt = hmac.Key;
-
+            user.Created = user.Created.EnsureUtc();
+            user.LastActive = user.LastActive.EnsureUtc();
+            user.DateOfBirth = user.LastActive.EnsureUtc();
             context.Users.Add(user);
         }
 
