@@ -4,12 +4,12 @@ using Newtonsoft.Json;
 
 namespace API.Services
 {
-    public class ChatgptApiService(string apiKey) : IChatgptApiService
+    public class ChatgptApiService(string apiKey)
     {
         private readonly string _apiKey = apiKey;
         private readonly string _apiUrl = "https://api.openai.com/v1/chat/completions"; // Endpoint da OpenAI
 
-        public async Task<string> SingleQuestion(string pergunta)
+        public async Task<string> SingleQuestion(string Question)
         {
             try
             {
@@ -22,7 +22,7 @@ namespace API.Services
                     messages = new[]
                     {
                         new { role = "system", content = "You are a helpful assistant." },
-                        new { role = "user", content = pergunta }
+                        new { role = "user", content = Question }
                     }
                 };
 
@@ -54,10 +54,10 @@ namespace API.Services
 
                 // Lê o corpo da resposta
                 var responseBody = await response.Content.ReadAsStringAsync();
-                var resposta = JsonConvert.DeserializeObject<ChatGPTResponse>(responseBody);
+                var Answer = JsonConvert.DeserializeObject<ChatGPTResponse>(responseBody);
 
                 // Retorna o conteúdo da resposta
-                return resposta.choices[0].message.content.Trim();
+                return Answer.choices[0].message.content.Trim();
             }
             catch (Exception ex)
             {

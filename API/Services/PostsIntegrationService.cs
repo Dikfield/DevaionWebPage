@@ -1,6 +1,7 @@
 
 using API.Helpers;
 using API.Interfaces;
+using API.Entities;
 using Microsoft.Extensions.Options;
 
 namespace API.Services
@@ -17,9 +18,9 @@ namespace API.Services
             twitterApi = new(twitterConfig.Value.OAuthConsumerKey, twitterConfig.Value.OAuthConsumerSecret, twitterConfig.Value.AccessToken, twitterConfig.Value.AccessTokenSecret, endPoint);
         }
 
-        public async Task<string> StartSingleTweet(string question)
+        public async Task<string> StartSingleTweet(Tweet tweet)
         {
-
+            var question = FormulateQuestion(tweet.Question, tweet.Characteres, tweet.Hashtags, tweet.Language);
             // Chama a API do ChatGPT para obter a resposta
             var answer = await chatgptApi.SingleQuestion(question);
 
@@ -29,20 +30,21 @@ namespace API.Services
             if (string.IsNullOrEmpty(answer))
                 return string.Empty;
 
-            Console.WriteLine(answer);
-
-            string tweet = answer;
-
             try
             {
-                twitterApi.Tweet(tweet);
+                twitterApi.Tweet(answer);
                 return answer;
             }
             catch (Exception ex)
             {
                 return string.Empty;
             }
+        }
 
+        private string FormulateQuestion(string question, int characteres, int hashs, string language)
+        {
+            return "Hello Chat, please answer that: " + question + " add max " + characteres
+                + "add the quantity of " + hashs + " in the main words and answer in the " + language;
         }
     }
 }

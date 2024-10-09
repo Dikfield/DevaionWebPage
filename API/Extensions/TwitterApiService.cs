@@ -4,7 +4,7 @@ using OAuth;
 
 namespace API.Services
 {
-    public class TwitterApiService(string oAuthConsumerKey, string oAuthConsumerSecret, string accessToken, string accessTokenSecret, string endPoint) : ITwitterApiService
+    public class TwitterApiService(string oAuthConsumerKey, string oAuthConsumerSecret, string accessToken, string accessTokenSecret, string endPoint)
     {
         private readonly string _oAuthConsumerKey = oAuthConsumerKey;
         private readonly string _oAuthConsumerSecret = oAuthConsumerSecret;

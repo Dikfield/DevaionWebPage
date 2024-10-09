@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Entities;
 
 namespace API.Interfaces
 {
     public interface IPostsIntegrationService
     {
-        Task<string> StartSingleTweet(string message);
+        Task<string> StartSingleTweet(Tweet tweet);
     }
 }

@@ -21,6 +21,7 @@ public static class ApplicationService
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IPhotoService, PhotoService>();
+        services.AddScoped<IPostsIntegrationService, PostsIntegrationService>();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
         services.Configure<TwitterAPISettings>(config.GetSection("TwitterAPISettings"));

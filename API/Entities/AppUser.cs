@@ -20,4 +20,5 @@ public class AppUser
     public string? City { get; set; }
     public required string Country { get; set; }
     public List<Photo> Photos { get; set; } = [];
+    public List<Tweet> Tweets { get; set; } = [];
 }
