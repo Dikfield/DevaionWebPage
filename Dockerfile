@@ -6,7 +6,7 @@ WORKDIR /source
 COPY . .
 RUN dotnet restore "./API/API.csproj" --disable-parallel
 
-RUN dotnet publish -c Release -0 ./publish
+RUN dotnet publish "./API/API.csproj" -c Release -o /app --no-restore
 
 # Etapa de produção
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
