@@ -1,0 +1,30 @@
+<div class="container mt-5">
+  @if (accountService.currentUser() == null){
+  <h1>
+    Hermano you are not allowed to tweet, you need first to login and sientar en
+    un maduro hediondo y apestoso
+  </h1>
+  } @else {
+
+  <div class="text-align: center">
+    @if (!tweetMode) {
+    <h1>Hermano locote</h1>
+    <p>loco locotee</p>
+    <div class="text-center">
+      <button (click)="tweetToggle()" class="btn btn-primary btn-lg me-2">
+        Post a tweet
+      </button>
+    </div>
+    } @if(tweetMode) {
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-4">
+          <app-tweet (cancelTwitter)="cancelTweet($event)"></app-tweet>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  }
+</div>

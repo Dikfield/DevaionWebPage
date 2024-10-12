@@ -13,7 +13,7 @@ namespace API.Controllers
     public class TweetController(IUserRepository userRepository, IMapper mapper, IPhotoService photoService, IPostsIntegrationService posts) : BaseApiController
     {
         [HttpPost("postTweet")]
-        public async Task<ActionResult<string>> SingleTweet(PostTweetDto postTweetDto)
+        public async Task<ActionResult<string>> SingleTweet([FromBody] PostTweetDto postTweetDto)
         {
             var user = await userRepository.GetMemberByUsernameAsync(User.GetUsername());
 

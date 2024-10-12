@@ -43,8 +43,7 @@ namespace API.Services
 
         private string FormulateQuestion(string question, int characteres, int hashs, string language)
         {
-            return "Hello Chat, please answer that: " + question + " add max " + characteres
-                + "add the quantity of " + hashs + " in the main words and answer in the " + language;
+            return $"Hello Chat, please answer that question: {question}. I want in the answer the maximum quantity of {characteres} characters, this lenght of chars is very important. Add the quantity of 1 hashtags before the main important quantity of {hashs} words, the answer in the language {language}.";
         }
     }
 }
