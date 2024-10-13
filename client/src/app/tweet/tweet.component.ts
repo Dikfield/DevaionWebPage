@@ -25,7 +25,9 @@ export class TweetComponent {
 
   tweet() {
     this.accountService.tweet(this.tweetDto).subscribe({
-      next: (response) => {},
+      next: (response) => {
+        console.log(response);
+      },
       error: (error) => console.log(error),
     });
     this.cancel();
