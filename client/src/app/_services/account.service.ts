@@ -4,7 +4,7 @@ import { User } from '../_models/user';
 import { map } from 'rxjs';
 import { Tweet } from '../_models/tweet';
 import { PostTweetDto } from '../_dtos/postTweetDto';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
