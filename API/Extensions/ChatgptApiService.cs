@@ -62,6 +62,7 @@ namespace API.Services
             catch (Exception ex)
             {
                 // Em caso de erro, retorna a mensagem de exceção
+                Console.WriteLine($"Error: {ex.Message}");
                 return $"Erro ao obter resposta: {ex.Message}";
             }
         }

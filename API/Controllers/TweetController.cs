@@ -46,7 +46,7 @@ namespace API.Controllers
 
             user.Tweets.Add(tweet);
 
-            if (await userRepository.SaveAllAsync()) return "tweeted: " + tweet.Answer;
+            if (await userRepository.SaveAllAsync() && tweet.Answer != null) return "tweeted: " + tweet.Answer;
 
 
             return BadRequest("Tweeting");
