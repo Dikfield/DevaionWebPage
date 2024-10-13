@@ -17,23 +17,26 @@ export class AccountService {
   currentUser = signal<User | null>(null);
 
   login(model: any) {
-    return this.http
-      .post<User>(this.baseUrl + 'account/login', model)
-      .pipe(
-        map((user) => {
-          if (user) {
-            localStorage.setItem('user', JSON.stringify(user));
-            this.currentUser.set(user);
-          }
-        })
-      );
+    return this.http.post<User>(this.baseUrl + 'account/login', model).pipe(
+      map((user) => {
+        if (user) {
+          this.setCurrentUser(user);
+        }
+        return user;
+      })
+    );
+  }
+
+  setCurrentUser(user: User) {
+    localStorage.setItem('user', JSON.stringify(user));
+    this.currentUser.set(user);
   }
 
   getUsers() {
     return this.http.get(this.baseUrl + 'users', this.getHttpOptions());
   }
+
   tweet(model: PostTweetDto) {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<Tweet>(
       this.baseUrl + 'tweet/posttweet',
       model,
