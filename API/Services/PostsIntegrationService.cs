@@ -20,24 +20,25 @@ namespace API.Services
 
         public async Task<string> StartSingleTweet(Tweet tweet)
         {
-            var question = FormulateQuestion(tweet.Question, tweet.Characteres, tweet.Hashtags, tweet.Language);
-            // Chama a API do ChatGPT para obter a resposta
-            var answer = await chatgptApi.SingleQuestion(question);
-
-            // Exibe a resposta
-            Console.WriteLine("Resposta do ChatGPT:");
-
-            if (string.IsNullOrEmpty(answer))
-                return string.Empty;
-
             try
             {
+                var question = FormulateQuestion(tweet.Question, tweet.Characteres, tweet.Hashtags, tweet.Language);
+
+                // Chama a API do ChatGPT para obter a resposta
+                var answer = await chatgptApi.SingleQuestion(question);
+
+                // Exibe a resposta
+                Console.WriteLine("Resposta do ChatGPT:");
+
+                if (string.IsNullOrEmpty(answer))
+                    return string.Empty;
                 twitterApi.Tweet(answer);
                 return answer;
             }
             catch (Exception ex)
             {
-                return string.Empty;
+                Console.WriteLine($"Erro ao processar o tweet: {ex.Message}");
+                return $"Erro ao processar o tweet: {ex.Message}";
             }
         }
 

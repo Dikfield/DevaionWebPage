@@ -39,17 +39,14 @@ namespace API.Services
                         if (response.Headers.TryGetValues("Retry-After", out var values))
                         {
                             string retryAfter = values.First();
-                            Console.WriteLine($"Você atingiu o limite de requisições. Tente novamente após {retryAfter} segundos.");
-                            return string.Empty;
+                            return $"Você atingiu o limite de requisições. Tente novamente após {retryAfter} segundos.";
                         }
                         else
                         {
-                            Console.WriteLine("Você atingiu o limite de requisições. Tente novamente mais tarde.");
-                            return string.Empty;
+                            return "Você atingiu o limite de requisições. Tente novamente mais tarde.";
                         }
                     }
-                    Console.WriteLine($"Erro: {response.StatusCode}, {await response.Content.ReadAsStringAsync()}");
-                    return string.Empty;
+                    return $"Erro: {response.StatusCode}, {await response.Content.ReadAsStringAsync()}";
                 }
 
                 // Lê o corpo da resposta
