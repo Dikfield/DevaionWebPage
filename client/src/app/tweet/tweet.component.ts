@@ -11,7 +11,7 @@ import { PostTweetDto } from '../_dtos/postTweetDto';
   templateUrl: './tweet.component.html',
   styleUrl: './tweet.component.css',
 })
-export class TweetComponent implements OnInit {
+export class TweetComponent {
   cancelTwitter = output<boolean>();
   private accountService = inject(AccountService);
   users: any = {};
@@ -23,18 +23,12 @@ export class TweetComponent implements OnInit {
     hashtags: 0,
   };
 
-  ngOnInit(): void {
-    this.loadUsers();
-  }
-
   tweet() {
     this.accountService.tweet(this.tweetDto).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.cancel();
-      },
+      next: (response) => {},
       error: (error) => console.log(error),
     });
+    this.cancel();
   }
 
   cancel() {
